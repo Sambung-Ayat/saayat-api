@@ -14,7 +14,7 @@ export class WinstonConfig implements WinstonModuleOptionsFactory {
     | Promise<WinstonModuleOptions>
     | WinstonModuleOptions {
     return {
-      level: this.config.get<string>('logLevel') || 'info',
+      level: this.config.get<string>('LOG_LEVEL') || 'info',
       transports: [
         new winston.transports.Console({
           format: winston.format.combine(
