@@ -4,8 +4,10 @@ import { WinstonModule } from 'nest-winston';
 import { TerminusModule } from '@nestjs/terminus';
 import { DatabaseModule } from '@/database/database.module';
 import { WinstonConfig } from '@/logger/winston.config';
+import { AuthModule } from '@thallesp/nestjs-better-auth';
 import { AppController } from '@/app.controller';
 import { AppService } from '@/app.service';
+import { auth } from '@/auth/auth';
 
 @Module({
   imports: [
@@ -15,6 +17,7 @@ import { AppService } from '@/app.service';
     }),
     TerminusModule,
     DatabaseModule,
+    AuthModule.forRoot({ auth }),
   ],
   controllers: [AppController],
   providers: [AppService],
