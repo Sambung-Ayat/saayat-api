@@ -8,6 +8,10 @@ import { AuthModule } from '@thallesp/nestjs-better-auth';
 import { AppController } from '@/app.controller';
 import { AppService } from '@/app.service';
 import { auth } from '@/auth/auth';
+import { AlquranModule } from './alquran/alquran.module';
+import { SurahsModule } from './surahs/surahs.module';
+import { QuestionModule } from './question/question.module';
+import { ValidateModule } from './validate/validate.module';
 
 @Module({
   imports: [
@@ -17,7 +21,11 @@ import { auth } from '@/auth/auth';
     }),
     TerminusModule,
     DatabaseModule,
-    AuthModule.forRoot({ auth }),
+    //AuthModule.forRoot({ auth }),
+    AlquranModule,
+    SurahsModule,
+    QuestionModule,
+    ValidateModule,
   ],
   controllers: [AppController],
   providers: [AppService],
