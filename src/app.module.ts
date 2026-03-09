@@ -8,11 +8,8 @@ import { WinstonConfig } from '@/logger/winston.config';
 import { AppController } from '@/app.controller';
 import { AppService } from '@/app.service';
 import { auth } from '@/auth/auth';
-import { AlquranModule } from './alquran/alquran.module';
-import { SurahsModule } from './surahs/surahs.module';
-import { QuestionModule } from './question/question.module';
-import { ValidateModule } from './validate/validate.module';
 import { LeaderboardModule } from '@/leaderboard/leaderboard.module';
+import { QuizModule } from '@/quiz/quiz.module';
 
 @Module({
   imports: [
@@ -23,12 +20,9 @@ import { LeaderboardModule } from '@/leaderboard/leaderboard.module';
     TerminusModule,
     DatabaseModule,
     AuthModule.forRoot({ auth }),
-    AlquranModule,
-    SurahsModule,
-    QuestionModule,
-    ValidateModule,
     AuthModule.forRoot({ auth }),
     LeaderboardModule,
+    QuizModule,
   ],
   controllers: [AppController],
   providers: [AppService],

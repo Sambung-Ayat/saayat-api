@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsOptional, IsNumber } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional, IsInt, Min } from 'class-validator';
 
 export class ValidateAnswerDto {
   @IsString()
@@ -10,6 +10,7 @@ export class ValidateAnswerDto {
   challengeToken: string;
 
   @IsOptional()
-  @IsNumber()
+  @IsInt()
+  @Min(1)
   sessionLimit?: number;
 }

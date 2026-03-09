@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
-import { QuestionController } from './question.controller';
+import { QuranModule } from '@/quran/quran.module';
 import { QuestionService } from './question.service';
-import { AlquranModule } from '@/alquran/alquran.module';
 
 @Module({
-  imports: [AlquranModule],
-  controllers: [QuestionController],
+  imports: [QuranModule],
   providers: [QuestionService],
+  exports: [QuestionService],
 })
 export class QuestionModule {}
