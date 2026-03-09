@@ -8,6 +8,7 @@ import { WinstonConfig } from '@/logger/winston.config';
 import { AppController } from '@/app.controller';
 import { AppService } from '@/app.service';
 import { auth } from '@/auth/auth';
+import { UserModule } from '@/user/user.module';
 import { LeaderboardModule } from '@/leaderboard/leaderboard.module';
 import { QuizModule } from '@/quiz/quiz.module';
 
@@ -21,6 +22,7 @@ import { QuizModule } from '@/quiz/quiz.module';
     DatabaseModule,
     AuthModule.forRoot({ auth }),
     AuthModule.forRoot({ auth }),
+    UserModule,
     LeaderboardModule,
     QuizModule,
   ],
