@@ -182,6 +182,7 @@ export class QuizService {
       comboStreak: stats?.comboStreak,
       pointsGained: stats?.pointsGained,
       totalPoints: stats?.totalPoints,
+      remainingQuestions: stats?.remainingQuestions,
       correctAyah: !isCorrect
         ? {
             id: correctAyah.number,
