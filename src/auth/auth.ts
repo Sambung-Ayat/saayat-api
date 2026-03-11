@@ -24,8 +24,9 @@ export const auth = betterAuth({
   },
   trustedOrigins: [
     'http://localhost:3000',
-    'https://dev.saayat.site',
+    'http://localhost:3001',
     'https://saayat.site',
+    'https://dev.saayat.site',
   ],
   hooks: {
     after: mergeGuestHook,
