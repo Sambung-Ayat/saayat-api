@@ -22,18 +22,22 @@ export const auth = betterAuth({
       redirectURI: `${process.env.BETTER_AUTH_URL}/auth/callback/google`,
     },
   },
-  trustedOrigins: [
-    'http://localhost:3000',
-    'http://localhost:3001',
-    'https://saayat.site',
-    'https://dev.saayat.site',
-  ],
+  trustedOrigins: process.env.ORIGINS?.split(',') || [],
   hooks: {
     after: mergeGuestHook,
   },
   advanced: {
     database: {
       generateId: () => uuidv4(),
+    },
+    crossSubDomainCookies: {
+      enabled: true,
+      domain: process.env.BETTER_AUTH_COOKIE_DOMAIN || '.saayat.site',
+    },
+    defaultCookieAttributes: {
+      secure: true,
+      sameSite: 'lax',
+      httpOnly: true,
     },
   },
 });
