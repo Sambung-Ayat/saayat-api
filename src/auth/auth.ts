@@ -1,6 +1,7 @@
 import { betterAuth } from 'better-auth';
 import { Pool } from 'pg';
 import { v4 as uuidv4 } from 'uuid';
+import { mergeGuestHook } from './hooks/merge-guest.hook';
 
 export const auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET,
@@ -22,6 +23,9 @@ export const auth = betterAuth({
     },
   },
   trustedOrigins: ['http://localhost:8080', 'http://localhost:3000'],
+  hooks: {
+    after: mergeGuestHook,
+  },
   advanced: {
     database: {
       generateId: () => uuidv4(),

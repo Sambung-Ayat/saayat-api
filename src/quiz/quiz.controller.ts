@@ -26,7 +26,7 @@ export class QuizController {
   }
 
   @Post('validate')
-  @OptionalAuth() // ← logged in = saves stats, guest = just validates
+  @OptionalAuth()
   validateAnswer(
     @Body() dto: ValidateAnswerDto,
     @Session() session: UserSession,
