@@ -22,7 +22,11 @@ export const auth = betterAuth({
       redirectURI: `${process.env.BETTER_AUTH_URL}/auth/callback/google`,
     },
   },
-  trustedOrigins: ['http://localhost:8080', 'http://localhost:3000'],
+  trustedOrigins: [
+    'http://localhost:3000',
+    'https://dev.saayat.site',
+    'https://saayat.site',
+  ],
   hooks: {
     after: mergeGuestHook,
   },
