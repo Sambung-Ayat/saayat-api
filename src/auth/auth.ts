@@ -1,7 +1,10 @@
 import { betterAuth } from 'better-auth';
+import { anonymous } from 'better-auth/plugins';
 import { Pool } from 'pg';
 import { v4 as uuidv4 } from 'uuid';
-import { mergeGuestHook } from './hooks/merge-guest.hook';
+import { onLinkAccount } from './hooks/link-account.hook';
+
+const isProductionOrTest = process.env.NODE_ENV !== 'development';
 
 export const auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET,
@@ -22,20 +25,35 @@ export const auth = betterAuth({
       redirectURI: `${process.env.BETTER_AUTH_URL}/auth/callback/google`,
     },
   },
-  trustedOrigins: process.env.ORIGINS?.split(',') || [],
-  hooks: {
-    after: mergeGuestHook,
+  databaseHooks: {
+    user: {
+      create: {
+        before: async (user) => {
+          if (user.isAnonymous) {
+            return {
+              data: { ...user, name: 'Hamba Allah' },
+            };
+          }
+        },
+      },
+    },
   },
+  trustedOrigins: process.env.ORIGINS?.split(',') || [],
+  plugins: [
+    anonymous({
+      emailDomainName: 'guest.saayat.site',
+      onLinkAccount,
+    }),
+  ],
   advanced: {
     database: {
       generateId: () => uuidv4(),
     },
-    crossSubDomainCookies: {
-      enabled: true,
-      domain: process.env.BETTER_AUTH_COOKIE_DOMAIN || '.saayat.site',
-    },
+    crossSubDomainCookies: isProductionOrTest
+      ? { enabled: true, domain: process.env.BETTER_AUTH_COOKIE_DOMAIN }
+      : { enabled: false },
     defaultCookieAttributes: {
-      secure: true,
+      secure: isProductionOrTest,
       sameSite: 'lax',
       httpOnly: true,
     },
