@@ -1,16 +1,13 @@
-import { IsString, IsNotEmpty, IsOptional, IsInt, Min } from 'class-validator';
+import { IsString, IsNumber, IsOptional } from 'class-validator';
 
 export class ValidateAnswerDto {
   @IsString()
-  @IsNotEmpty()
   choiceKey: string;
 
   @IsString()
-  @IsNotEmpty()
   challengeToken: string;
 
   @IsOptional()
-  @IsInt()
-  @Min(1)
+  @IsNumber()
   sessionLimit?: number;
 }

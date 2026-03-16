@@ -23,6 +23,9 @@ export class User {
   @Column({ type: 'text', nullable: true })
   image: string | null;
 
+  @Column({ default: false })
+  isAnonymous: boolean;
+
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
